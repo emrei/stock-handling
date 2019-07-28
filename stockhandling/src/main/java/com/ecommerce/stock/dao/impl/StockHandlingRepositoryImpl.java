@@ -20,6 +20,13 @@ import com.ecommerce.stock.model.Store;
 @Repository
 public class StockHandlingRepositoryImpl implements StockHandlingRepository {
 
+    /**
+     * ProductStockMap holds stores of productID. It is a concurrent hashmap in
+     * order to handle concurrent requests. Store model holds stock and sales
+     * records of that stock. When store is updated, it means stock of the product
+     * and sales records are also updated. This keeps the stock information in a
+     * valid state.
+     */
     private final ConcurrentHashMap<String, Store> productStockMap = new ConcurrentHashMap<String, Store>();
 
     @Override
@@ -37,8 +44,7 @@ public class StockHandlingRepositoryImpl implements StockHandlingRepository {
 
     @Override
     public Optional<Stock> getStock(String productId) {
-	Optional<Store> store = Optional.ofNullable(productStockMap.get(productId));
-	return store.map(Store::getStock);
+	return Optional.ofNullable(productStockMap.get(productId)).map(Store::getStock);
     }
 
     @Override

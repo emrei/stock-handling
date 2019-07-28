@@ -19,13 +19,20 @@ public enum RangeEnum {
 	return this.value;
     }
 
+    /**
+     * Creates RangeEnum for given value. This is a simple mapping. If this enum
+     * class keeps more time range in the future. It can be created a specific
+     * object instead of enum class
+     * 
+     * @param value
+     * @return
+     */
     public static RangeEnum fromValue(String value) {
 	for (RangeEnum range : values()) {
 	    if (range.value.equals(value)) {
 		return range;
 	    }
 	}
-	throw new IllegalArgumentException(
-		"Unknown time range " + value + ", Allowed values are [today, lastMonth]");
+	throw new IllegalArgumentException("Unknown time range " + value + ", Allowed values are [today, lastMonth]");
     }
 }

@@ -2,7 +2,8 @@ package com.ecommerce.stock.dao;
 
 import static org.junit.Assert.assertEquals;
 
-import java.time.OffsetDateTime;
+import java.time.Instant;
+import java.time.ZoneOffset;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -42,21 +43,21 @@ public class StockHandlingRepositoryTests {
 
     @Before
     public void setup() {
-	stockVegetable1 = new Stock("000001", "vegetable-123", OffsetDateTime.parse("2019-07-16T15:54:01.754Z"), 100);
-	stockVegetable2 = new Stock("000001", "vegetable-123", OffsetDateTime.parse("2019-07-28T15:58:01.954Z"), 98);
-	stockVegetable3 = new Stock("000001", "vegetable-123", OffsetDateTime.parse("2019-07-28T15:58:02.954Z"), 99);
+	stockVegetable1 = new Stock("000001", "vegetable-123", Instant.now().atOffset(ZoneOffset.UTC).minusMonths(2), 100);
+	stockVegetable2 = new Stock("000001", "vegetable-123", Instant.now().atOffset(ZoneOffset.UTC), 98);
+	stockVegetable3 = new Stock("000001", "vegetable-123", Instant.now().atOffset(ZoneOffset.UTC), 99);
 
-	stockFruit1 = new Stock("000002", "fruit", OffsetDateTime.parse("2019-06-16T11:54:01.754Z"), 300);
-	stockFruit2 = new Stock("000002", "fruit", OffsetDateTime.parse("2019-06-17T11:54:01.754Z"), 290);
-	stockFruit3 = new Stock("000002", "fruit", OffsetDateTime.parse("2019-07-27T21:59:01.954Z"), 270);
+	stockFruit1 = new Stock("000002", "fruit",  Instant.now().atOffset(ZoneOffset.UTC).minusMonths(2), 300);
+	stockFruit2 = new Stock("000002", "fruit", Instant.now().atOffset(ZoneOffset.UTC).minusDays(45), 290);
+	stockFruit3 = new Stock("000002", "fruit", Instant.now().atOffset(ZoneOffset.UTC).minusDays(1), 270);
 
-	stockMilk1 = new Stock("000003", "milk", OffsetDateTime.parse("2019-07-26T21:54:01.754Z"), 63);
-	stockMilk2 = new Stock("000003", "milk", OffsetDateTime.parse("2019-07-26T21:57:01.754Z"), 62);
-	stockMilk3 = new Stock("000003", "milk", OffsetDateTime.parse("2019-07-28T11:59:01.954Z"), 58);
+	stockMilk1 = new Stock("000003", "milk",  Instant.now().atOffset(ZoneOffset.UTC).minusDays(2), 63);
+	stockMilk2 = new Stock("000003", "milk",  Instant.now().atOffset(ZoneOffset.UTC).minusDays(2), 62);
+	stockMilk3 = new Stock("000003", "milk",  Instant.now().atOffset(ZoneOffset.UTC), 58);
 
-	stockBeverage1 = new Stock("000004", "beverage", OffsetDateTime.parse("2019-05-16T21:54:01.754Z"), 250);
-	stockBeverage2 = new Stock("000004", "beverage", OffsetDateTime.parse("2019-05-19T20:54:01.754Z"), 231);
-	stockBeverage3 = new Stock("000004", "beverage", OffsetDateTime.parse("2019-07-28T15:59:01.954Z"), 160);
+	stockBeverage1 = new Stock("000004", "beverage",  Instant.now().atOffset(ZoneOffset.UTC).minusDays(90), 250);
+	stockBeverage2 = new Stock("000004", "beverage",  Instant.now().atOffset(ZoneOffset.UTC).minusDays(86), 231);
+	stockBeverage3 = new Stock("000004", "beverage",  Instant.now().atOffset(ZoneOffset.UTC), 160);
 
     }
 

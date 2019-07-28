@@ -46,7 +46,6 @@ public class StockHandlingServiceImpl implements StockHandlingService {
     }
 
     private List<Stock> getTopAvailableProducts(List<StockStatistic> stockStatisticList) {
-
 	return stockStatisticList.stream().sorted(Comparator.comparing(StockStatistic::getQuantity).reversed()).limit(3)
 		.map(s -> {
 		    return new Stock(s.getId(), s.getProductId(), s.getTimestamp(), s.getQuantity());
@@ -55,7 +54,6 @@ public class StockHandlingServiceImpl implements StockHandlingService {
     }
 
     private List<ProductStatistic> getTopSellingProducts(List<StockStatistic> stockStatisticList) {
-
 	return stockStatisticList.stream().sorted(Comparator.comparing(StockStatistic::getSoldNumber).reversed())
 		.limit(3).map(s -> new ProductStatistic(s.getProductId(), s.getRange(), s.getSoldNumber()))
 		.collect(Collectors.toList());

@@ -31,18 +31,21 @@ public class StockHandlingExceptionController extends ResponseEntityExceptionHan
 
     @ExceptionHandler(value = StockNotFoundException.class)
     public ResponseEntity<RestApiResponse> handleStockNotFound(StockNotFoundException exception) {
+	logger.error(exception.getMessage());
 	return new ResponseEntity<RestApiResponse>(new RestApiResponse(HttpStatus.NOT_FOUND,
 		Instant.now().atOffset(ZoneOffset.UTC), exception.getMessage()), HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(value = OutdatedStockException.class)
     public ResponseEntity handleProductNotFound(OutdatedStockException exception) {
+	logger.error(exception.getMessage());
 	return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
     @Override
-    protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex,
+    protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException exception,
 	    HttpHeaders headers, HttpStatus status, WebRequest request) {
+	logger.error(exception.getMessage());
 	return new ResponseEntity<Object>(new RestApiResponse(HttpStatus.BAD_REQUEST,
 		Instant.now().atOffset(ZoneOffset.UTC), "Erroneous JSON request"), HttpStatus.BAD_REQUEST);
     }

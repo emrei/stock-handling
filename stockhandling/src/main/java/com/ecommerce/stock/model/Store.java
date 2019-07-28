@@ -26,7 +26,8 @@ public class Store {
     }
 
     /**
-     * upadtes store with new stock information and returns updated stock
+     * Updates store with new stock information and returns updated stock.
+     * Add new sales record if this update is a sale
      * 
      * @param newStock
      * @return

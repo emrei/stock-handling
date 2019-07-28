@@ -1,6 +1,7 @@
 package com.ecommerce.stock.controller;
 
-import java.time.OffsetDateTime;
+import java.time.Instant;
+import java.time.ZoneOffset;
 
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
@@ -41,24 +42,25 @@ public class StockHandlingControllerTests {
     public void setup() {
 	restTemplate = new TestRestTemplate();
 
-	stockVegetableDTO1 = new StockDTO("000001", OffsetDateTime.parse("2019-07-16T15:54:01.754Z"), "vegetable-123",
-		100);
-	stockVegetableDTO2 = new StockDTO("000001", OffsetDateTime.parse("2019-07-28T15:58:01.954Z"), "vegetable-123",
-		98);
-	stockVegetableDTO3 = new StockDTO("000001", OffsetDateTime.parse("2019-07-28T15:58:02.954Z"), "vegetable-123",
-		99);
+	stockVegetableDTO1 = new StockDTO("000001", Instant.now().atOffset(ZoneOffset.UTC).minusMonths(2),
+		"vegetable-123", 100);
+	stockVegetableDTO2 = new StockDTO("000001", Instant.now().atOffset(ZoneOffset.UTC), "vegetable-123", 98);
+	stockVegetableDTO3 = new StockDTO("000001", Instant.now().atOffset(ZoneOffset.UTC), "vegetable-123", 99);
 
-	stockFruitDTO1 = new StockDTO("000002", OffsetDateTime.parse("2019-06-16T11:54:01.754Z"), "fruit", 300);
-	stockFruitDTO2 = new StockDTO("000002", OffsetDateTime.parse("2019-06-17T11:54:01.754Z"), "fruit", 290);
-	stockFruitDTO3 = new StockDTO("000002", OffsetDateTime.parse("2019-07-27T21:59:01.954Z"), "fruit", 270);
+	stockFruitDTO1 = new StockDTO("000002", Instant.now().atOffset(ZoneOffset.UTC).minusMonths(2), "fruit", 300);
+	stockFruitDTO2 = new StockDTO("000002", Instant.now().atOffset(ZoneOffset.UTC).minusDays(45), "fruit", 290);
+	stockFruitDTO3 = new StockDTO("000002", Instant.now().atOffset(ZoneOffset.UTC).minusDays(1), "fruit", 270);
 
-	stockMilkDTO1 = new StockDTO("000003", OffsetDateTime.parse("2019-07-26T21:54:01.754Z"), "milk", 63);
-	stockMilkDTO2 = new StockDTO("000003", OffsetDateTime.parse("2019-07-26T21:57:01.754Z"), "milk", 62);
-	stockMilkDTO3 = new StockDTO("000003", OffsetDateTime.parse("2019-07-28T11:59:01.954Z"), "milk", 58);
+	stockMilkDTO1 = new StockDTO("000003", Instant.now().atOffset(ZoneOffset.UTC).minusDays(2), "milk", 63);
+	stockMilkDTO2 = new StockDTO("000003", Instant.now().atOffset(ZoneOffset.UTC).minusDays(2), "milk", 62);
+	stockMilkDTO3 = new StockDTO("000003", Instant.now().atOffset(ZoneOffset.UTC), "milk", 58);
 
-	stockBeverageDTO1 = new StockDTO("000004", OffsetDateTime.parse("2019-05-16T21:54:01.754Z"), "beverage", 250);
-	stockBeverageDTO2 = new StockDTO("000004", OffsetDateTime.parse("2019-05-19T20:54:01.754Z"), "beverage", 231);
-	stockBeverageDTO3 = new StockDTO("000004", OffsetDateTime.parse("2019-07-28T15:59:01.954Z"), "beverage", 160);
+	stockBeverageDTO1 = new StockDTO("000004", Instant.now().atOffset(ZoneOffset.UTC).minusDays(90), "beverage",
+		250);
+	stockBeverageDTO2 = new StockDTO("000004", Instant.now().atOffset(ZoneOffset.UTC).minusDays(86), "beverage",
+		231);
+	stockBeverageDTO3 = new StockDTO("000004", Instant.now().atOffset(ZoneOffset.UTC), "beverage", 160);
+
     }
 
     @Test
@@ -92,8 +94,6 @@ public class StockHandlingControllerTests {
 	MatcherAssert.assertThat(response.getStatusCode(), Matchers.equalTo(HttpStatus.OK));
 	MatcherAssert.assertThat(response.getBody().getProductId(), Matchers.equalTo("vegetable-123"));
 	MatcherAssert.assertThat(response.getBody().getStock().getId(), Matchers.equalTo("000001"));
-	MatcherAssert.assertThat(response.getBody().getStock().getTimestamp(),
-		Matchers.equalTo(OffsetDateTime.parse("2019-07-16T15:54:01.754Z")));
 	MatcherAssert.assertThat(response.getBody().getStock().getQuantity(), Matchers.equalTo(100));
     }
 

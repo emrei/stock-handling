@@ -5,6 +5,8 @@ import java.time.ZoneOffset;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +30,7 @@ import com.ecommerce.stock.web.model.RestApiResponse;
 
 /**
  * Rest Controller for stock handling
+ * 
  * @author YunusEmre
  *
  */
@@ -37,8 +40,11 @@ public class StockHandlingController {
     @Autowired
     StockHandlingService stockHandlingService;
 
+    Logger logger = LoggerFactory.getLogger(StockHandlingController.class);
+
     @PostMapping("/stock/update")
     public ResponseEntity<RestApiResponse> updateStock(@RequestBody StockDTO stockDTO) {
+	logger.info("Update Stock request for product: " + stockDTO.getProductId());
 	stockHandlingService.updateStock(convertToStock(stockDTO));
 	return new ResponseEntity<RestApiResponse>(new RestApiResponse(HttpStatus.CREATED,
 		Instant.now().atOffset(ZoneOffset.UTC), "Stock with id " + stockDTO.getId() + " has been updated"),
@@ -47,6 +53,7 @@ public class StockHandlingController {
 
     @GetMapping("/stock")
     public ResponseEntity<StockOfProductResponseDTO> getStock(@RequestParam("productId") String productId) {
+	logger.info("Get Stock request for product: " + productId);
 	Stock stock = stockHandlingService.getStock(productId);
 	return ResponseEntity.ok(new StockOfProductResponseDTO(productId, Instant.now().atOffset(ZoneOffset.UTC),
 		new StockOfProductDTO(stock.getId(), stock.getTimestamp(), stock.getQuantity())));
@@ -54,6 +61,7 @@ public class StockHandlingController {
 
     @GetMapping("/statistics")
     public ResponseEntity<StatisticsResponseDTO> getStatistics(@RequestParam("time") String time) {
+	logger.info("Statistics request for time: " + time);
 	StoreStatistics stockStatistics = stockHandlingService.getStatistics(RangeEnum.fromValue(time));
 	return ResponseEntity.ok(convertToStatisticsResponseDTO(stockStatistics));
     }
@@ -63,7 +71,6 @@ public class StockHandlingController {
     }
 
     private StatisticsResponseDTO convertToStatisticsResponseDTO(StoreStatistics statistics) {
-
 	List<StockDTO> topAvailableProducts = statistics.getTopAvailableProducts().stream()
 		.map(p -> convertToStockDTO(p)).collect(Collectors.toList());
 	List<ProductSoldDTO> topSellingProducts = statistics.getTopSellingProducts().stream()

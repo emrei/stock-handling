@@ -33,7 +33,10 @@ public interface StockHandlingRepository {
 
     /**
      * Returns list of stockStatistic which contains stock information and sold
-     * number info for given range
+     * number info for given range. StockStatistic doesn't contain stock object,
+     * instead it contains value of the stock at requested moment. By this way stock
+     * statistic data can not be changed by other threads while being processed
+     * after.
      * 
      * @param range
      * @return
