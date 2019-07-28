@@ -16,9 +16,7 @@ import com.ecommerce.stock.model.StockStatistic;
 public interface StockHandlingRepository {
 
     /**
-     * Updates stock. If there is no stock and product with given id, then it
-     * creates a new one. If there is an incompatible case such as there is a
-     * product with given product id but no stock id, then it throws an exception
+     * Updates stock. If there is no stock for given id, then it creates a new one.
      * 
      * @param stock
      * @return
@@ -26,8 +24,7 @@ public interface StockHandlingRepository {
     Stock updateStock(Stock stock);
 
     /**
-     * Returns stock for given product id. If there is no stock for given id then it
-     * throws an exception
+     * Returns stock for given product id.
      * 
      * @param productId
      * @return

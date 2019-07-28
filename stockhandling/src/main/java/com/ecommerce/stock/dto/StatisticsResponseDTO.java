@@ -3,14 +3,25 @@ package com.ecommerce.stock.dto;
 import java.time.OffsetDateTime;
 import java.util.List;
 
+/**
+ * StatisticsResponseDTO model keeps requested timestamp and statistics of the
+ * given range. This is used for communication with client
+ * 
+ * @author YunusEmre
+ *
+ */
 public class StatisticsResponseDTO {
     private OffsetDateTime requestTimestamp;
     private String range;
-    List<StockRequestDTO> topAvailableProducts;
+    List<StockDTO> topAvailableProducts;
     List<ProductSoldDTO> topSellingProducts;
 
-    public StatisticsResponseDTO(OffsetDateTime requestTimestamp, String range,
-	    List<StockRequestDTO> topAvailableProducts, List<ProductSoldDTO> topSellingProducts) {
+    public StatisticsResponseDTO() {
+
+    }
+
+    public StatisticsResponseDTO(OffsetDateTime requestTimestamp, String range, List<StockDTO> topAvailableProducts,
+	    List<ProductSoldDTO> topSellingProducts) {
 	this.requestTimestamp = requestTimestamp;
 	this.range = range;
 	this.topAvailableProducts = topAvailableProducts;
@@ -33,11 +44,11 @@ public class StatisticsResponseDTO {
 	this.range = range;
     }
 
-    public List<StockRequestDTO> getTopAvailableProducts() {
+    public List<StockDTO> getTopAvailableProducts() {
 	return topAvailableProducts;
     }
 
-    public void setTopAvailableProducts(List<StockRequestDTO> topAvailableProducts) {
+    public void setTopAvailableProducts(List<StockDTO> topAvailableProducts) {
 	this.topAvailableProducts = topAvailableProducts;
     }
 

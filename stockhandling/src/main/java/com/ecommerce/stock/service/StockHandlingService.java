@@ -2,7 +2,7 @@ package com.ecommerce.stock.service;
 
 import com.ecommerce.stock.enums.RangeEnum;
 import com.ecommerce.stock.model.Stock;
-import com.ecommerce.stock.model.StockStatistics;
+import com.ecommerce.stock.model.StoreStatistics;
 
 /**
  * Stock handling service managing stocks
@@ -14,8 +14,8 @@ public interface StockHandlingService {
 
     /**
      * Updates stock. If there is no stock and product with given id, then it
-     * creates a new one. If there is an incompatible case such as there is a
-     * product with given product id but no stock id, then it throws an exception
+     * creates a new one. If given stock is an outdated stock then it throws
+     * exception
      * 
      * @param stock
      * @return
@@ -37,6 +37,6 @@ public interface StockHandlingService {
      * @param valueOf
      * @return
      */
-    StockStatistics getStatistics(RangeEnum range);
+    StoreStatistics getStatistics(RangeEnum range);
 
 }

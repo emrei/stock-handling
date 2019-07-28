@@ -1,8 +1,18 @@
 package com.ecommerce.stock.dto;
 
+/**
+ * ProductSoldDTO model keeps product id and number of items sold.
+ * This model is used for communication with client
+ * @author YunusEmre
+ *
+ */
 public class ProductSoldDTO {
     private String productId;
     private int itemsSold;
+
+    public ProductSoldDTO() {
+	
+    }
 
     public ProductSoldDTO(String productId, int itemsSold) {
 	this.productId = productId;

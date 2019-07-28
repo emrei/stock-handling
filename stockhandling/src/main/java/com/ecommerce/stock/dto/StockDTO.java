@@ -2,13 +2,23 @@ package com.ecommerce.stock.dto;
 
 import java.time.OffsetDateTime;
 
-public class StockRequestDTO {
+/**
+ * StockDTO model keeps stock information and used for client communication
+ * 
+ * @author YunusEmre
+ *
+ */
+public class StockDTO {
     private String id;
     private OffsetDateTime timestamp;
     private String productId;
     private int quantity;
 
-    public StockRequestDTO(String id, OffsetDateTime timestamp, String productId, int quantity) {
+    public StockDTO() {
+
+    }
+
+    public StockDTO(String id, OffsetDateTime timestamp, String productId, int quantity) {
 	this.id = id;
 	this.timestamp = timestamp;
 	this.productId = productId;
