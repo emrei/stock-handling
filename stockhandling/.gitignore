@@ -1,6 +1,5 @@
 /.classpath
 /.project
 /stockhandling.log
-/stockhandling.log.2019-07-24.0.gz
-/stockhandling.log.2019-07-26.0.gz
 /.settings/
+/target/
