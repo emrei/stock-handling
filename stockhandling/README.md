@@ -14,7 +14,8 @@ FURTHER IMPROVEMENTS
 1- ModelMapper can be used for DTO conversion instead of doing manually.
 2- Database can be used instead of in memory data structures.
 3- InitBinder can be used for conversion of enum values.
-4- Controller and Repository test methods depend on offsetTime, tests can give different results with respect to different time. They can be changed and moocked. Time dependency can be solved.
+4- Controller and Repository test methods depend on offsetTime, tests can give different results with respect to different time. They can be changed and mocked. Time dependency can be solved.
+5- Concurrency test method depend on the random stock id, therefore sometimes random ids can be same. In that case assertion fails. It can be changed later for a better consistency
 
 FEEDBACKS
 

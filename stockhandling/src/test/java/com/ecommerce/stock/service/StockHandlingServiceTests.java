@@ -13,6 +13,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.ecommerce.stock.dao.StockHandlingRepository;
@@ -32,6 +33,7 @@ import com.ecommerce.stock.service.impl.StockHandlingServiceImpl;
  *
  */
 @RunWith(SpringRunner.class)
+@SpringBootTest
 public class StockHandlingServiceTests {
 
     @InjectMocks
@@ -97,8 +99,7 @@ public class StockHandlingServiceTests {
 
     @Test
     public void testGetStock_Successful() {
-	Mockito.when(stockHandlingRepository.getStock("vegetable-123"))
-		.thenReturn(Optional.ofNullable(stockVegetable));
+	Mockito.when(stockHandlingRepository.getStock("vegetable-123")).thenReturn(Optional.ofNullable(stockVegetable));
 	Stock actualStock = stockHandlingService.getStock("vegetable-123");
 	assertEquals(stockVegetable.getId(), actualStock.getId());
 	assertEquals(stockVegetable.getTimestamp(), actualStock.getTimestamp());
