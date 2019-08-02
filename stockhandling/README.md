@@ -17,10 +17,3 @@ FURTHER IMPROVEMENTS
 4- Controller and Repository test methods depend on offsetTime, tests can give different results with respect to different time. They can be changed and mocked. Time dependency can be solved.
 5- Concurrency test method depend on the random stock id, therefore sometimes random ids can be same. In that case assertion fails. It can be changed later for a better consistency
 
-FEEDBACKS
-
-I think the task is well defined and reasonable to complete in 8 hours. It is good to be free to use any tool or framework to complete the task. I can say that I enjoyed while doing it and I learned new things also, since this task was an opportunity for me to try spring boot framework. Maybe I can just mention two little things.
-
-1- In the assignment document, stock and product are mixed. What is stock and what is product I was confused and I tried to understand for a while.
-2- Error handling situations can be explained better.
-
